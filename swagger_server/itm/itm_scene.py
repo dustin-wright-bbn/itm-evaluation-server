@@ -112,7 +112,7 @@ class ITMScene:
                 parameters=mapping.parameters,
                 kdma_association=mapping.kdma_association if self.training else None
             )
-            for mapping in self.action_mappings if (not mapping.action_id in self.actions_taken) or mapping.repeatable
+            for mapping in self.action_mappings if ((not mapping.action_id in self.actions_taken) or mapping.repeatable) and self.conditions_met(mapping.conditions, state, mapping.condition_semantics)
         ]
 
         # When all actions are intent actions, don't add unmapped action types.
